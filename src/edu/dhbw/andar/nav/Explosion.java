@@ -10,8 +10,8 @@ public class Explosion extends Model3D{
 
 	public boolean explotando=false;
 	
-	public Explosion() {
-		super(Global.getModel("winner.obj"), "Wing.patt");
+	public Explosion(String obj, String pat) {
+		super(Global.getModel(obj), pat);
 		// TODO Auto-generated constructor stub
 		this.model.scale=0;
 	}

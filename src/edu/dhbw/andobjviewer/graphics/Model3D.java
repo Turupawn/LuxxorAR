@@ -22,6 +22,7 @@ package edu.dhbw.andobjviewer.graphics;
 import java.io.BufferedReader;
 import java.io.Serializable;
 import java.io.Writer;
+import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
@@ -33,6 +34,7 @@ import android.opengl.GLUtils;
 import android.util.Log;
 
 import edu.dhbw.andar.ARObject;
+import edu.dhbw.andar.util.GraphicsUtil;
 import edu.dhbw.andobjviewer.models.Group;
 import edu.dhbw.andobjviewer.models.Material;
 import edu.dhbw.andobjviewer.models.Model;
@@ -105,6 +107,23 @@ public class Model3D extends ARObject implements Serializable{
 	@Override
 	public void draw(GL10 gl) {
 		super.draw(gl);
+		
+		float[] ambientlight1 = {1f, 1f, 1f, 1f};
+		float[] diffuselight1 = {1f, 1f, 1f, 1f};
+		float[] specularlight1 = {1f, 1f, 1f, 1f};
+		float[] lightposition1 = {20.0f,-500.0f,400.0f,1f};
+		
+		FloatBuffer lightPositionBuffer1 =  GraphicsUtil.makeFloatBuffer(lightposition1);
+		FloatBuffer specularLightBuffer1 = GraphicsUtil.makeFloatBuffer(specularlight1);
+		FloatBuffer diffuseLightBuffer1 = GraphicsUtil.makeFloatBuffer(diffuselight1);
+		FloatBuffer ambientLightBuffer1 = GraphicsUtil.makeFloatBuffer(ambientlight1);
+
+		gl.glLightfv(GL10.GL_LIGHT1, GL10.GL_AMBIENT, ambientLightBuffer1);
+		gl.glLightfv(GL10.GL_LIGHT1, GL10.GL_DIFFUSE, diffuseLightBuffer1);
+		gl.glLightfv(GL10.GL_LIGHT1, GL10.GL_SPECULAR, specularLightBuffer1);
+		gl.glLightfv(GL10.GL_LIGHT1, GL10.GL_POSITION, lightPositionBuffer1);
+		gl.glEnable(GL10.GL_LIGHT1);
+		
 		
 		//gl = (GL10) GLDebugHelper.wrap(gl, GLDebugHelper.CONFIG_CHECK_GL_ERROR, log);
 		//do positioning:

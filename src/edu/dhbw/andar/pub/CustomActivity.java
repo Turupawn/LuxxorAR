@@ -18,14 +18,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 import edu.dhbw.andar.AndARActivity;
 import edu.dhbw.andar.nav.Explosion;
-import edu.dhbw.andar.nav.Explosion1A;
-import edu.dhbw.andar.nav.Explosion2;
-import edu.dhbw.andar.nav.Explosion2A;
-import edu.dhbw.andar.nav.Jugador1;
-import edu.dhbw.andar.nav.Jugador2;
-import edu.dhbw.andar.nav.Poder1;
-import edu.dhbw.andar.nav.Poder2;
-import edu.dhbw.andar.nav.Terreno;
+import edu.dhbw.andobjviewer.graphics.Model3D;
 import edu.dhbw.andobjviewer.models.Model;
 import edu.dhbw.andobjviewer.parser.ObjParser;
 import edu.dhbw.andobjviewer.util.AssetsFileUtil;
@@ -97,14 +90,32 @@ public class CustomActivity extends AndARActivity {
 //			
 //			Global.explosion4 = new Explosion4();
 //			Global.artoolkit.registerARObject(Global.explosion4);
-			Global.jugador1=new Jugador1();
-			Global.artoolkit.registerARObject(Global.jugador1);
+			Global.cofre1=new Model3D(Global.getModel("estrella.obj"),"luxxor1.patt");
+			Global.artoolkit.registerARObject(Global.cofre1);
+			
+			Global.cofre2=new Model3D(Global.getModel("sombrilla.obj"),"luxxor2.patt");
+			Global.artoolkit.registerARObject(Global.cofre2);
+			
+			Global.cofre3=new Model3D(Global.getModel("pelota.obj"),"luxxor3.patt");
+			Global.artoolkit.registerARObject(Global.cofre3);
+			
+			Global.cofre4=new Model3D(Global.getModel("flotadores.obj"),"luxxor4.patt");
+			Global.artoolkit.registerARObject(Global.cofre4);
 			
 //			Global.jugador2=new Jugador2();
 //			Global.artoolkit.registerARObject(Global.jugador2);
 			
-			Global.explosion1 = new Explosion();
+			Global.explosion1 = new Explosion("winner.obj","luxxor1.patt");
 			Global.artoolkit.registerARObject(Global.explosion1);
+			
+			Global.explosion2 = new Explosion("winner.obj","luxxor2.patt");
+			Global.artoolkit.registerARObject(Global.explosion2);
+			
+			Global.explosion3 = new Explosion("winner.obj","luxxor3.patt");
+			Global.artoolkit.registerARObject(Global.explosion3);
+			
+			Global.explosion4 = new Explosion("winner.obj","luxxor4.patt");
+			Global.artoolkit.registerARObject(Global.explosion4);
 			
 //			Global.explosion2 = new Explosion2();
 //			Global.artoolkit.registerARObject(Global.explosion2);
@@ -285,9 +296,36 @@ public class CustomActivity extends AndARActivity {
 //				Global.turno_jugador_1=!Global.turno_jugador_1;
 //			}
 			
-			if(Global.jugador1.isVisible())
+			if(Global.cofre1.isVisible()
+					&& !Global.cofre2.isVisible()
+					&& !Global.cofre3.isVisible()
+					&& !Global.cofre4.isVisible())
 			{
 				Global.explosion1.explotando=true;
+			}
+			
+			if(!Global.cofre1.isVisible()
+					&& Global.cofre2.isVisible()
+					&& !Global.cofre3.isVisible()
+					&& !Global.cofre4.isVisible())
+			{
+				Global.explosion2.explotando=true;
+			}
+			
+			if(!Global.cofre1.isVisible()
+					&& !Global.cofre2.isVisible()
+					&& Global.cofre3.isVisible()
+					&& !Global.cofre4.isVisible())
+			{
+				Global.explosion3.explotando=true;
+			}
+			
+			if(!Global.cofre1.isVisible()
+					&& !Global.cofre2.isVisible()
+					&& !Global.cofre3.isVisible()
+					&& Global.cofre4.isVisible())
+			{
+				Global.explosion4.explotando=true;
 			}
 			
 //			if(Global.wing.isVisible())
